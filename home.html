@@ -1,0 +1,109 @@
+<!DOCTYPE html >
+<html>
+<head>
+<title>Led Controlado por Wi-Fi</title>
+<script src="jquery.js"></script>
+</head>
+<body>
+<h3> <i> Direccion IP del ESP8266 </i> </h3>
+<div style="margin: 0; width:400px; height:30px;">
+<FORM NAME="form" ACTION="" METHOD="GET">
+ESP8266 IP:
+<INPUT TYPE="text" NAME="inputbox" VALUE="" />
+</FORM>
+</div>
+<h3> Click para Manejar el carro! </h3>
+<input type="button" onmousedown= "led1();" onmouseup= "stop();" NAME="butname" value="ARRIBA" />
+<input type="button" onmousedown= "led2();" onmouseup= "stop();" NAME="butname2" value="ABAJO" />
+<input type="button" onmousedown= "led3();" onmouseup= "stop();" NAME="butname3" value="IZQUIERDA" />
+<input type="button" onmousedown= "led4();" onmouseup= "stop();" NAME="butname4" value="DERECHA" />
+<input type="button" NAME="butname5" value="STOP" />
+</body>
+<script>
+$.ajaxSetup({timeout:1000});
+btn = document.querySelector('input[name="butname"]');
+btn2 = document.querySelector('input[name="butname2"]');
+btn3 = document.querySelector('input[name="butname3"]');
+btn4 = document.querySelector('input[name="butname4"]');
+btn5 = document.querySelector('input[name="butname5"]');
+
+
+//btn.addEventListener('click', led1);
+//btn2.addEventListener('click', led2);
+//btn3.addEventListener('click', led3);
+//btn4.addEventListener('click', led4);
+btn5.addEventListener('click', stop);
+
+function led1()
+{
+	var val1 = 'ALTO';
+	if (btn.value === 'ARRIBA') 
+	{
+	btn.value = 'ARRIBA';
+	val1 = 'ALTO';
+	} 
+	
+	TextVar = form.inputbox.value;
+	ArduinoVar = "http://" + TextVar + ":80/";
+	$.get( ArduinoVar, {led: val1})	;
+	{Connection: keep-alive};
+}
+function led2()
+{
+	var val2 = 'BAJO';
+	if (btn2.value === 'ABAJO') 
+	{
+	btn2.value = 'ABAJO';
+	val2 = 'BAJO';
+	} 
+	
+	TextVar = form.inputbox.value;
+	ArduinoVar = "http://" + TextVar + ":80/";
+	$.get( ArduinoVar, {led: val2})	;
+	{Connection: keep-alive};
+}
+function led3()
+{
+	var val3 = 'IZQUIERDA';
+	if (btn3.value === 'IZQUIERDA') 
+	{
+	btn3.value = 'IZQUIERDA';
+	val3 = 'IZQUIERDA';
+	} 
+	
+	TextVar = form.inputbox.value;
+	ArduinoVar = "http://" + TextVar + ":80/";
+	$.get( ArduinoVar, {led: val3})	;
+	{Connection: keep-alive};
+}
+function led4()
+{
+	var val4 = "DERECHA";
+	if (btn4.value === 'DERECHA') 
+	{
+	btn4.value = 'DERECHA';
+	val4 = 'DERECHA';
+	} 
+	
+	TextVar = form.inputbox.value;
+	ArduinoVar = "http://" + TextVar + ":80/";
+	$.get( ArduinoVar, {led: val4})	;
+	{Connection: keep-alive};
+}
+function stop()
+{
+	var val5 = "STOP";
+	if (btn5.value === 'STOP') 
+	{
+	btn5.value = 'STOP';
+	val5 = 'STOP';
+	} 
+	
+	TextVar = form.inputbox.value;
+	ArduinoVar = "http://" + TextVar + ":80/";
+	$.get( ArduinoVar, {led: val5})	;
+	{Connection: keep-alive};
+}
+
+</script>
+</html>
